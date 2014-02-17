@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# wringPi install
 sudo apt-get update;sudo apt-get upgrade -y
+sudo apt-get install cmake -y
+
+# wringPi install
 git clone git://git.drogon.net/wiringPi
 cd wiringPi
 ./build
