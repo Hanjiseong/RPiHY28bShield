@@ -8,8 +8,8 @@ pi@openmake ~ $ cd RPiHY28bShield
 
 pi@openmake ~/RPiHY28bShield $ sh setup.sh
 
-# HY28B Model
+# HY28A Model
 pi@openmake ~/RPiHY28bShield $ sh config_hy28a.sh
 
-# HY28A Model
+# HY28B Model
 pi@openmake ~/RPiHY28bShield $ sh config_hy28b.sh
