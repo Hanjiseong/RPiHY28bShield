@@ -60,8 +60,6 @@ if [ ! -d "$DIRECTORY/rpi-fbcp" ]; then
     exit 0
 fi
 
-sh $DIRECTORY/config_hy28b.sh
-
 # Touch Pannel
 grep -q 'DISPLAY' /etc/X11/xinit/xinitrc
 if [ ! $? -eq 0 ] ; then
@@ -88,6 +86,13 @@ echo "Touch Pannel rpi-firmware rpi-update Done" >> $LOGFILE
 sudo reboot
 exit 0
 
+## HY28B Pannel
+#grep -q 'ads7846' /etc/modules
+#if [ ! $? -eq 0 ] ; then
+#    echo "HY28B Process" >> $LOGFILE
+#    sh $DIRECTORY/config_hy28b.shß
+#    echo "HY28B Done" >> $LOGFILE
+#fi
 
 #sudo FRAMEBUFFER=/dev/fb1 startx -- -dpi 60
 
