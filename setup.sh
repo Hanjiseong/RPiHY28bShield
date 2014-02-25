@@ -5,6 +5,14 @@ LOGFILE=$DIRECTORY/setup.log
 echo $DIRECTORY
 echo $LOGFILE
 
+if [ ! $1=="hy28a" ]; then
+    if [ ! $1=="hy28b" ]; then
+        echo "Usage : setup.sh [model]"
+        echo "model : hy28a, hy28b"
+        exit 0
+    fi
+fi
+
 if [ ! -f $LOGFILE ]; then
     touch $LOGFILE
     chmod 666 $LOGFILE
@@ -13,7 +21,7 @@ fi
 grep -q 'setup.sh' /etc/rc.local
 if [ ! $? -eq 0 ] ; then
     echo "Update rc.local" >> $LOGFILE
-    sudo sed -i "/^fi/ a\su -c 'sh $DIRECTORY/setup.sh' pi" /etc/rc.local
+    sudo sed -i "/^fi/ a\su -c 'sh $DIRECTORY/setup.sh $1' pi" /etc/rc.local
 fi
 
 if [ ! -f "/usr/local/lib/libwiringPi.so" ]; then
@@ -60,6 +68,16 @@ if [ ! -d "$DIRECTORY/rpi-fbcp" ]; then
     exit 0
 fi
 
+# HY28B Pannel
+grep -q 'ads7846' /etc/modules
+if [ ! $? -eq 0 ] ; then
+    echo "TFT Process" >> $LOGFILE
+    sh $DIRECTORY/$1.sh
+    echo "TFT Done" >> $LOGFILE
+    sudo reboot
+    exit 0
+fi
+
 # Touch Pannel
 grep -q 'DISPLAY' /etc/X11/xinit/xinitrc
 if [ ! $? -eq 0 ] ; then
@@ -85,14 +103,6 @@ sudo sed -i '/setup.sh/d' /etc/rc.local
 echo "Touch Pannel rpi-firmware rpi-update Done" >> $LOGFILE
 sudo reboot
 exit 0
-
-## HY28B Pannel
-#grep -q 'ads7846' /etc/modules
-#if [ ! $? -eq 0 ] ; then
-#    echo "HY28B Process" >> $LOGFILE
-#    sh $DIRECTORY/config_hy28b.shß
-#    echo "HY28B Done" >> $LOGFILE
-#fi
 
 #sudo FRAMEBUFFER=/dev/fb1 startx -- -dpi 60
 
