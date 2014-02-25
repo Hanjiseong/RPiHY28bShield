@@ -1,5 +1,5 @@
 #!/bin/bash
-DIRECTORY=/home/pi/openproject/RPiHY28bShield
+DIRECTORY=/home/pi/RPiHY28bShield
 LOGFILE=$DIRECTORY/setup.log
 
 echo $DIRECTORY
