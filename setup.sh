@@ -54,7 +54,7 @@ if [ ! $? -eq 0 ] ; then
     sudo sed -i "/fbdev/ s/^/#/" /usr/share/X11/xorg.conf.d/99-fbturbo.conf
     sudo apt-mark hold raspberrypi-bootloader
     sudo apt-get update
-    sudo apt-get upgrade
+    sudo apt-get upgrade -y
     sudo REPO_URI=https://github.com/notro/rpi-firmware rpi-update
     sudo reboot
 fi
