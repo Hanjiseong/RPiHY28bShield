@@ -1,6 +1,8 @@
 #!/bin/bash
 DIRECTORY=~/RPiHY28bShield
 
+echo $DIRECTORY
+
 grep -q '$DIRECTORY/setup.sh' /etc/rc.local
 if [ ! $? -eq 0 ] ; then
     sudo sed -i "/^fi/ a\su -c 'sh $DIRECTORY/setup.sh' pi" /etc/rc.local
