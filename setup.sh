@@ -18,6 +18,8 @@ if [ ! -f $LOGFILE ]; then
     chmod 666 $LOGFILE
 fi
 
+date >> $LOGFILE
+
 grep -q 'setup.sh' /etc/rc.local
 if [ ! $? -eq 0 ] ; then
     echo "Update rc.local" >> $LOGFILE
@@ -101,6 +103,8 @@ sudo REPO_URI=https://github.com/notro/rpi-firmware rpi-update
 sudo sed -i '/setup.sh/d' /etc/rc.local
 
 echo "Touch Pannel rpi-firmware rpi-update Done" >> $LOGFILE
+date >> $LOGFILE
+
 sudo reboot
 exit 0
 
