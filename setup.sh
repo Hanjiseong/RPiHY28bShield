@@ -5,11 +5,20 @@ LOGFILE=$DIRECTORY/setup.log
 echo $DIRECTORY
 echo $LOGFILE
 
-if [ ! $1=="hy28a" ]; then
-    if [ ! $1=="hy28b" ]; then
-        echo "Usage : setup.sh [model]"
-        echo "model : hy28a, hy28b"
-        exit 0
+if [ -z $1 ]; then
+    echo "Usage : setup.sh [model]"
+    echo "model : hy28a, hy28b"
+    exit 0
+else
+    if [ $1 = "hy28a" ]; then
+        echo "Select hy28a" >> $LOGFILE
+    else 
+        if [ $1 = "hy28b" ]; then
+            echo "Select hy28b" >> $LOGFILE
+        else
+            echo "model : hy28a, hy28b"
+            exit 0
+        fi
     fi
 fi
 
