@@ -25,3 +25,4 @@ mkdir build
 cd build
 cmake ..
 make
+sudo install fbcp /usr/local/bin/fbcp
