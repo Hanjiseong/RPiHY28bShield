@@ -3,7 +3,9 @@ DIRECTORY=~/RPiHY28bShield
 
 echo $DIRECTORY
 
-touch setup.log
+if [ ! -f "$DIRECTORY/setup.log"]; then
+    touch setup.log
+fi
 
 grep -q 'setup.sh' /etc/rc.local
 if [ ! $? -eq 0 ] ; then
