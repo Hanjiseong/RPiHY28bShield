@@ -6,10 +6,13 @@ pi@openmake ~ $ git clone https://github.com/rasplay/RPiHY28bShield
 
 pi@openmake ~ $ cd RPiHY28bShield
 
-pi@openmake ~/RPiHY28bShield $ sh setup.sh
+[example]
 
-# HY28A Model
-pi@openmake ~/RPiHY28bShield $ sh config_hy28a.sh
+pi@openmake ~/RPiHY28bShield $ sh setup.sh hy28b
 
-# HY28B Model
-pi@openmake ~/RPiHY28bShield $ sh config_hy28b.sh
+
+[included setup.sh]
+
+hy28a.sh : HY28A Model Setup File
+
+hy28b.sh : HY28B Model Setup File

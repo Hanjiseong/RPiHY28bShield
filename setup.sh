@@ -1,9 +1,11 @@
 #!/bin/bash
 DIRECTORY=/home/pi/RPiHY28bShield
 LOGFILE=$DIRECTORY/setup.log
+DRIVER=$1
 
 echo $DIRECTORY
 echo $LOGFILE
+echo $DRIVER
 
 if [ -z $1 ]; then
     echo "Usage : setup.sh [model]"
@@ -32,7 +34,7 @@ date >> $LOGFILE
 grep -q 'setup.sh' /etc/rc.local
 if [ ! $? -eq 0 ] ; then
     echo "Update rc.local" >> $LOGFILE
-    sudo sed -i "/^fi/ a\su -c 'sh $DIRECTORY/setup.sh $1' pi" /etc/rc.local
+    sudo sed -i "/^fi/ a\su -c 'sh $DIRECTORY/setup.sh $DRIVER' pi" /etc/rc.local
 fi
 
 if [ ! -f "/usr/local/lib/libwiringPi.so" ]; then
@@ -83,7 +85,7 @@ fi
 grep -q 'ads7846' /etc/modules
 if [ ! $? -eq 0 ] ; then
     echo "TFT Process" >> $LOGFILE
-    sh $DIRECTORY/$1.sh
+    sh $DIRECTORY/$DRIVER.sh
     echo "TFT Done" >> $LOGFILE
     sudo reboot
     exit 0
