@@ -10,7 +10,5 @@ pi@openmake ~ $ cd RPiHY28bShield
 pi@openmake ~/RPiHY28bShield $ sh setup.sh hy28b
 
 [included setup.sh]
-# HY28A Model Setup
-hy28a.sh
-# HY28B Model Setup
-hy28b.sh
+hy28a.sh : HY28A Model Setup File
+hy28b.sh : HY28B Model Setup File
