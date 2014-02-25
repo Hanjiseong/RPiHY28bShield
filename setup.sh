@@ -60,7 +60,7 @@ if [ ! -d "$DIRECTORY/rpi-fbcp" ]; then
     exit 0
 fi
 
-#sh $DIRECTORY/config_hy28b.sh
+sh $DIRECTORY/config_hy28b.sh
 
 # Touch Pannel
 grep -q 'DISPLAY' /etc/X11/xinit/xinitrc
