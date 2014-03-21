@@ -62,7 +62,7 @@ if [ ! -d "$DIRECTORY/rpi-fbcp" ]; then
     echo "rpi-firmware rpi-update Process" >> $LOGFILE
     sudo wget https://raw.github.com/Hexxeh/rpi-update/master/rpi-update -O /usr/bin/rpi-update && sudo chmod +x /usr/bin/rpi-update
     sudo mv /lib/modules/$(uname -r) /lib/modules/$(uname -r).bak
-    sudo REPO_URI=https://github.com/notro/rpi-firmware rpi-update
+    sudo REPO_URI=https://github.com/notro/rpi-firmware UPDATE_SELF=0 rpi-update
     echo "rpi-firmware rpi-update Done" >> $LOGFILE
 
     # framebuffer tft-lcd fbx copy program
@@ -97,8 +97,10 @@ if [ ! $? -eq 0 ] ; then
     echo "Touch Pannel Process" >> $LOGFILE
     sudo apt-get install libts-bin evtest xinput python-dev python-pip -y
     sudo pip install evdev
-    echo "Touch Pannel Calibration" >> $LOGFILE
-    sudo TSLIB_FBDEVICE=/dev/fb1 TSLIB_TSDEVICE=/dev/input/event0 ts_calibrate
+    ## Moved ##
+    #echo "Touch Pannel Calibration" >> $LOGFILE
+    #sudo TSLIB_FBDEVICE=/dev/fb1 TSLIB_TSDEVICE=/dev/input/event0 ts_calibrate
+    ## Moved ##
     sudo sed -i "/Xsession/ i\DISPLAY=:0 xinput --set-prop 'ADS7846 Touchscreen' 'Evdev Axis Inversion' 0 0" /etc/X11/xinit/xinitrc
     sudo sed -i "/fbdev/ s/^/#/" /usr/share/X11/xorg.conf.d/99-fbturbo.conf
     sudo reboot
@@ -109,7 +111,11 @@ echo "Touch Pannel rpi-firmware rpi-update Process" >> $LOGFILE
 sudo apt-mark hold raspberrypi-bootloader
 sudo apt-get update
 sudo apt-get upgrade -y
-sudo REPO_URI=https://github.com/notro/rpi-firmware rpi-update
+sudo REPO_URI=https://github.com/notro/rpi-firmware UPDATE_SELF=0 rpi-update
+
+echo "Almost Done..Touch Pannel Calibration" >> $LOGFILE
+echo "Almost Done..Touch Pannel Calibration"
+sudo TSLIB_FBDEVICE=/dev/fb1 TSLIB_TSDEVICE=/dev/input/event0 ts_calibrate
 
 sudo sed -i '/setup.sh/d' /etc/rc.local
 
